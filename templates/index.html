@@ -43,15 +43,31 @@
       </form>
 
       <!-- The Modal -->
-      <!-- <div class="modal"> -->
+      <div class="modal">
 
         <!-- Modal content -->
-        <!-- <div class="modal-content">
-          <span class="btn-close">&times;</span>
-          <p>Some text in the Modal..</p>
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form method="post" class="form-card-modal">
+            <input
+              class="modal-title"
+              type="text"
+              name="titulo"
+              placeholder="Título para atualizar"
+            />
+            <textarea
+              class="modal-autoresize"
+              name="detalhes"
+              placeholder="Digite o conteúdo para atualizar"
+            ></textarea>
+            <button name="update" class="btn" type="submit">Atualizar Card</button>
+            
+          </form>
+            <button name="delete" class="btn" style="background-color: tomato;" type="submit">Deletar Card</button>
         </div>
   
-      </div> -->
+      </div>
+      
 
       <div class="card-container">
         {notes}
