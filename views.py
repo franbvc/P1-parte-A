@@ -12,10 +12,24 @@ def index(request):
         request = request.replace('\r', '')  # Remove caracteres indesejados
         # Cabeçalho e corpo estão sempre separados por duas quebras de linha
         partes = request.split('\n\n')
+        # print(partes)
         corpo = partes[1]
         if corpo.split("=")[0] == 'delete':
             id_int = int(corpo.split("=")[1])
             db.delete(id_int)
+
+        elif 'update' in corpo:
+            params = {}
+            for chave_valor in corpo.split('&'):
+                if chave_valor.startswith("titulo"):
+                    params["titulo"] = urllib.parse.unquote_plus(chave_valor[chave_valor.find("=")+1:], encoding="utf-8", errors="replace")
+                if chave_valor.startswith("detalhes"):
+                    params["detalhes"] = urllib.parse.unquote_plus(chave_valor[chave_valor.find("=")+1:], encoding="utf-8", errors="replace")
+                if chave_valor.startswith("update"):
+                    params["id"] = urllib.parse.unquote_plus(chave_valor[chave_valor.find("=")+1:], encoding="utf-8", errors="replace")
+
+            db.update(Note(id=params["id"], title=params["titulo"], content=params["detalhes"]))
+
 
         else:
             params = {}
